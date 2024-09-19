@@ -12,5 +12,54 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-
+model User{
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String?
+  profile Profile?
+  blogs Blog[]
+  comments Comment[]
+  upvotes Upvote[]
+  
+}
+model Profile{
+  id Int @id @default(autoincrement())
+  name String
+  user User @relation(fields: [userId], references: [id])
+  userId  Int @unique
+}
+model Blog{
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  user User @relation(fields: [userId], references: [id])
+  userId  Int
+  tags String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  upvotes Int @default(0)
+  comments Comment[]
+  upvotedBy Upvote[]
+}
+model Comment{
+  id Int @id @default(autoincrement())
+  content String
+  user User @relation(fields: [userId], references: [id])
+  userId  Int
+  blog Blog @relation(fields: [blogId], references: [id])
+  blogId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  upvotes Int @default(0)
+  upvotedBy Upvote[]
+}
+model Upvote {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  blog      Blog?     @relation(fields: [blogId], references: [id])  // Blog upvote relation
+  blogId    Int?
+  comment   Comment?  @relation(fields: [commentId], references: [id])  // Comment upvote relation
+  commentId Int?
+  createdAt DateTime  @default(now())
+}
