@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
 
-  your-app-service:
+  test-backend:
     build: .
     environment:
       DATABASE_URL: postgres://your_user:your_password@devdb:5432/your_database
