@@ -19,7 +19,6 @@ FROM node:${NODE_VERSION}
 
 # Use production node environment by default.
 ENV NODE_ENV=production
-ENV DATABASE_URL=postgresql://postgres:example@db:5432/learning?sslmode=disable
 
 
 

@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'  # Ensure this is included
 
 services:
   db:
@@ -14,12 +14,17 @@ services:
   test-backend:
     build: .
     environment:
-      DATABASE_URL: postgres://your_user:your_password@devdb:5432/your_database
+      DATABASE_URL: postgres://your_user:your_password@db:5432/your_database
       PORT: 8080
+      MAIL_HOST: ${MAIL_HOST}
+      EMAIL: ${EMAIL}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+
     ports:
       - "8080:8080"
     depends_on:
       - db
+    command: bash -c './wait-for-it.sh -h db -p 5432 --timeout=30 --strict -- npm start'
 
   db-migration:
     build: .
@@ -27,4 +32,4 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://your_user:your_password@devdb:5432/your_database
-    command: bash -c './wait-for-it.sh -h devdb -p 5432 && npx prisma migrate dev'
+    command: bash -c './wait-for-it.sh -h db -p 5432 --timeout=30 --strict -- npx prisma migrate dev'
