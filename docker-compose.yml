@@ -19,6 +19,7 @@ services:
       MAIL_HOST: ${MAIL_HOST}
       EMAIL: ${EMAIL}
       EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
 
     ports:
       - "8080:8080"
@@ -31,5 +32,5 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://your_user:your_password@devdb:5432/your_database
+      DATABASE_URL: postgres://your_user:your_password@db:5432/your_database
     command: bash -c './wait-for-it.sh -h db -p 5432 --timeout=30 --strict -- npx prisma migrate dev'

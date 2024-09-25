@@ -1,23 +1,6 @@
 const prisma = require("./prismaInstance");
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
-const user = require("./createUser");
-require("dotenv").config();
-const otp = require("./api/otp/index");
-
-app.use(bodyParser.json());
-const PORT = process.env.PORT || 3000;
-const cors = require("cors");
-app.use(cors());
-app.use("/", otp);
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
-app.post("/createUser", user);
-
+const app = require("./index");
+const PORT = process.env.PORT || 8080;
 // Check Prisma connection
 async function startServer() {
   try {
