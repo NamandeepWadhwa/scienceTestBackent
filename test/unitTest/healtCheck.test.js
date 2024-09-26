@@ -7,3 +7,4 @@ describe('GET /health', () => {
     expect(response.statusCode).toBe(200);
   })
 });
+

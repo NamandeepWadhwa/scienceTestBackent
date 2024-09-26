@@ -1,21 +1,28 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
 require("dotenv").config();
-const otp = require("./api/otp/index");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 const passport = require("passport");
 app.use(passport.initialize());
-const user = require("./api/user/index");
-
-app.use(bodyParser.json());
-
 const cors = require("cors");
 app.use(cors());
-app.use("/", otp);
 
+// importing routes
+const user = require("./api/user/index");
+const profile = require("./api/profile/index");
+const otp = require("./api/otp/index");
+
+// routes
+
+//health check
 app.get("/", (req, res) => {
   res.status(200).send("Hello World");
 });
-
+//otp
+app.use("/", otp);
+//user
 app.use("/", user);
- module.exports=app;
+//profile
+app.use("/", profile);
+module.exports = app;

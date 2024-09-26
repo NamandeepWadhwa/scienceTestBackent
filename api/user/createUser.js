@@ -6,19 +6,19 @@ const createToken = require("../../lib/tokens/createToken");
 module.exports=async(req,res)=>{
   try {
     const { email, password } = req.body;
+    console.log(email);
     
-
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "email or password cannot be empty" });
+    }
     const user = await getUser(email);
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const Creatinguser = await createUser(email, password);
-    if (Creatinguser == null) {
-      return res
-        .status(400)
-        .json({ message: "email or password cannot be empty" });
-    }
     const token = createToken(Creatinguser);
     return res.status(200).json({ token: token });
   } catch (error) {

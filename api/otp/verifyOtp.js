@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
         email,
       },
     });
+    
     if(!otpData){
       return res.status(400).json({message:"Invalid OTP"});
     }
@@ -15,9 +16,11 @@ module.exports = async (req, res) => {
     const otpTime=new Date(otpData.createdAt);
     const timeDifference=timeNow-otpTime;
     const fiveMinutes=5*60*1000;
+
     if(timeDifference>fiveMinutes){
       return res.status(410).json({message:"OTP expired"});
     }
+    console.log(otp,otpData.otp);
     if(otp!=otpData.otp){
       return res.status(400).json({message:"Invalid OTP"});
     }

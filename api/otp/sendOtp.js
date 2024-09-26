@@ -3,8 +3,14 @@ const prismaInstance = require('../../prismaInstance');
 const generateOtp = require('../../lib/otp/generateOtp');
 
 module.exports = async (req, res) => {
-  const { email } = req.body;
+  
+  
   try{
+    console.log(req.body);
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: "Please provide email" });
+    } 
     const newOtp = generateOtp(6);
     const otpData=await prismaInstance.otp.findUnique({
       where: {
@@ -32,7 +38,13 @@ module.exports = async (req, res) => {
     const title="OTP verification";
     const body=`<h1>Your OTP is ${newOtp}</h1>`
     await mailSender(email, title, body);
-    return res.status(200).json({message:"OTP sent successfully"});
+    let data={};
+    data.message="OTP sent successfully";
+  
+    if(process.NODE_ENV!=="production"){
+      data.otp=newOtp;
+    }
+    return res.status(200).json({data});
 
 
   }
