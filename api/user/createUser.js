@@ -1,6 +1,5 @@
 const getUser = require("../../lib/user/getUser");
 const createUser = require("../../lib/user/createUser");
-const hash = require("../../lib/hashing/hash");
 const createToken = require("../../lib/tokens/createToken");
 
 module.exports=async(req,res)=>{

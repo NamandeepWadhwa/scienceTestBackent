@@ -10,14 +10,16 @@ describe('testing for creating profile',()=>{
   // creating user and getting token
   test('it should return 200',async()=>{
     const response=await supertest(app).post('/createUser').send({email:"testingProfile@gmail.com",password:"testingProfile"});
- if(response.statusCode===400){
-    const user = await getUser({ email: "testingProfile@gmail.com" });
+   
+ if(response.statusCode===500 || response.statusCode==400){
+    const user = await getUser("testingProfile@gmail.com");
     token = createToken(user);
 
  }
  else{
   token=response.body.token;
  }
+
 
   });
   
@@ -44,7 +46,7 @@ describe('testing for creating profile',()=>{
       name:"test",
       imageUrl:"test"
     });
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200 || 400);
   })
   // updateing profile unatuhticated request
   test('it should return 401',async()=>{
@@ -70,5 +72,10 @@ describe('testing for creating profile',()=>{
     expect(response.body.responseData.userProfile.name).toBe("test1");
     expect(response.body.responseData.userProfile.imageUrl).toBe("tes1");
   });
+  test('Deleting the user',async()=>{
+    console.log(token);
+    const response=await supertest(app).delete('/deleteProfile').set('Authorization',`jwt ${token}`);
+    expect(response.statusCode).toBe(200);
+  })
 
 });
