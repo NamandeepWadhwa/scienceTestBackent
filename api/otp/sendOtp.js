@@ -19,11 +19,12 @@ module.exports = async (req, res) => {
     });
     if(otpData){
       await prismaInstance.otp.update({
-        where:{
+        where: {
           email,
         },
-        data:{
-          otp:newOtp,
+        data: {
+          otp: newOtp,
+          createdAt:new Date()
         },
       });
     }
@@ -37,7 +38,7 @@ module.exports = async (req, res) => {
     }
     const title="OTP verification";
     const body=`<h1>Your OTP is ${newOtp}</h1>`
-    await mailSender(email, title, body);
+    const data2=await mailSender(email, title, body);
     let data={};
     data.message="OTP sent successfully";
   
