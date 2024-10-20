@@ -1,12 +1,12 @@
-const getUser = require("../../lib/user/getUser");
+const getUser = require("../../lib/user/getAuthUser");
 const createUser = require("../../lib/user/createUser");
 const createToken = require("../../lib/tokens/createToken");
 
-module.exports=async(req,res)=>{
+module.exports = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email);
     
+
     if (!email || !password) {
       return res
         .status(400)
@@ -24,5 +24,4 @@ module.exports=async(req,res)=>{
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-
 };
