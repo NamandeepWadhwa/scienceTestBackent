@@ -2,6 +2,7 @@
 const prismaInstance = require("../../prismaInstance");
 module.exports = async (req, res) => {
   const {email, otp} = req.body;
+  
   try{
     const otpData=await prismaInstance.otp.findUnique({
       where: {
@@ -20,9 +21,9 @@ module.exports = async (req, res) => {
     if(timeDifference>fiveMinutes){
       return res.status(410).json({message:"OTP expired"});
     }
-    console.log(otp,otpData.otp);
-    if(otp!=otpData.otp){
-      return res.status(400).json({message:"Invalid OTP"});
+    
+    if (otp !== otpData.otp) {
+      return res.status(400).json({ message: "Invalid OTP" });
     }
     await prismaInstance.otp.delete({
       where:{

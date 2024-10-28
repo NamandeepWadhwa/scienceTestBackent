@@ -6,7 +6,8 @@ module.exports = async (req, res) => {
   
   
   try{
-    console.log(req.body);
+    console.log(req.body)
+    
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ message: "Please provide email" });
