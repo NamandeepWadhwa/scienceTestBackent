@@ -6,8 +6,10 @@ module.exports = async (req, res) => {
   try {
     const { email, password } = req.body;
     
+    
 
     if (!email || !password) {
+      console.log("I am here")
       return res
         .status(400)
         .json({ message: "email or password cannot be empty" });

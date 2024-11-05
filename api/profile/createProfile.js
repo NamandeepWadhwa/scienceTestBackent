@@ -4,7 +4,7 @@ module.exports=async(req,res)=>{
   try{
   const userId=req.user.id;
   const {name,imageUrl}=req.body;
-  if(!name || !imageUrl){
+  if(!name){
     return res.status(400).json({message:"Please provide all the fields"});
   }
   const profile=await getProfile(userId);

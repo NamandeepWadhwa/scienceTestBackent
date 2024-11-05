@@ -1,6 +1,7 @@
 const updateProfileFunction=require('../../lib/profile/updateProfile');
 module.exports=async(req,res)=>{
   try{
+  
   const userId=req.user.id;
   const {name,imageUrl}=req.body;
   if(!name && !imageUrl){

@@ -1,7 +1,7 @@
 const getProfilefromLib = require('../../lib/profile/getProfile');
 module.exports = async function getProfile(req, res) {
   try{
-    const userId = req.userId;
+    const userId = req.user.id;
     const profile = await getProfilefromLib(userId);
     if(!profile){
       return res.status(404).json({message:"Profile not found"});
