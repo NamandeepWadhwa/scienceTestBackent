@@ -1,7 +1,7 @@
 const sendOtp = require('./sendOtp');
 const verifyOtp = require('./verifyOtp');
-const expressq = require('express');
-const router = expressq.Router();
+const express = require('express');
+const router = express.Router();
 
 router.post('/sendOtp', sendOtp);
 router.post('/verifyOtp', verifyOtp);

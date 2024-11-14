@@ -12,6 +12,7 @@ app.use(cors());
 const user = require("./api/user/index");
 const profile = require("./api/profile/index");
 const otp = require("./api/otp/index");
+const nasa=require('./api/nasa/index');
 
 // routes
 
@@ -25,4 +26,6 @@ app.use("/", otp);
 app.use("/", user);
 //profile
 app.use("/", profile);
+//nasa api
+app.use("/",nasa);
 module.exports = app;
