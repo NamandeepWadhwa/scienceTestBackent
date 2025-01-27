@@ -33,7 +33,9 @@ const allObjects = Object.entries(nearEarthObjects).map(([date, objects]) => {
       id: obj.id,
       name: obj.name,
       isHazardous: obj.is_potentially_hazardous_asteroid,
-      diameter: obj.estimated_diameter.kilometers, // Fix: Accessed correctly
+      diameter: obj.estimated_diameter.meters.estimated_diameter_max,
+      closestSpeed:
+        (obj.close_approach_data[0].relative_velocity.kilometers_per_second)*1000,
     })),
   };
 });
