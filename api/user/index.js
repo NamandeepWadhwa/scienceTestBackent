@@ -6,11 +6,13 @@ const createAuthUser=require('./createAuthUser');
 const deleteUser=require('./deleteUser')
 const getUser=require('./getUser')
 const getAuthUser=require('./getAuthUser')
+const getTestUser=require('./getTestUser')
 
 router.post('/createUser',createUser);
 router.post('/createAuthUser',createAuthUser);
 router.delete('/deleteUser',authenticate,deleteUser);
 router.post('/getUser',getUser)
 router.post('/getAuthUser',getAuthUser)
+router.post('/getTestUser',getTestUser)
 
 module.exports=router;
