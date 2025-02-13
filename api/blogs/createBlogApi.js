@@ -1,10 +1,10 @@
 const createBlog = require("../../lib/blog/createBlog");
 module.exports = async (req, res) => {
   try {
-    const data = req.body;
-    data.userId = req.user.id;
-    await createBlog(data);
-    return res.status(200).json({ message: "Blog created successfully" });
+    const blog = req.body;
+    blog.userId = req.user.id;
+    const data=await createBlog(blog);
+    return res.status(200).json( data );
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
