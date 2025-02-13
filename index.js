@@ -13,6 +13,7 @@ const user = require("./api/user/index");
 const profile = require("./api/profile/index");
 const otp = require("./api/otp/index");
 const nasa=require('./api/nasa/index');
+const blogs=require('./api/blogs/index');
 
 // routes
 
@@ -28,4 +29,8 @@ app.use("/", user);
 app.use("/", profile);
 //nasa api
 app.use("/",nasa);
+
+//blogs
+app.use("/",blogs);
+
 module.exports = app;
