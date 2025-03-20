@@ -1,4 +1,4 @@
-version: '3.8'  # Ensure this is included
+
 
 services:
   db:
