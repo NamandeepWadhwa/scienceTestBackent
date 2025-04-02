@@ -1,12 +1,12 @@
 const getAllBlogs=require("../../lib/blog/getAllblogs");
 module.exports=async (req,res)=>{
   try{
-    const currsorId=req.query.cursorId;
+    const cursorId=req.query.cursorId;
     const latest=req.query.latest;
     const byUpvotes=req.query.byUpvotes;
     const tag=req.query.tag;
-    console.log(req.query,"inside the get blogs");
-    const blogs = await getAllBlogs(latest, byUpvotes, currsorId,tag);
+    
+    const blogs = await getAllBlogs(latest, byUpvotes, cursorId,tag);
    
     if(blogs.length>0)
     {
@@ -19,6 +19,7 @@ module.exports=async (req,res)=>{
     }
     else{
         const data={
+      cursorId:null,
       blogs:blogs
     }
     return res.status(200).json(data);

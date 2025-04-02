@@ -3,10 +3,12 @@ const router=require('express').Router();
 const authenticate = require("../../lib/tokens/authenticate");
 const getAllBlogs=require("./getBlogs")
 const populateDatabse=require("./populateDatabs");
+const getUserBlogs=require("./getUserBlogs");
 
 router.post('/createBlog',authenticate,createBlog);
 router.get('/getBlogs',getAllBlogs);
 router.get('/populateDatabase',populateDatabse);
+router.get('/getUserBlogs',authenticate,getUserBlogs);
 
 
 module.exports=router;

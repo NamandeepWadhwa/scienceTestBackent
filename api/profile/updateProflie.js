@@ -4,8 +4,8 @@ module.exports=async(req,res)=>{
   
   const userId=req.user.id;
   const {name,imageUrl}=req.body;
-  if(!name && !imageUrl){
-    return res.status(400).json({message:"Please provide at least one field to update"});
+  if(!name){
+    return res.status(400).json({message:"Please provide name"});
   }
   
   
