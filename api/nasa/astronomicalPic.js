@@ -3,35 +3,16 @@ dotenv.config();
 
 module.exports = async (req, res) => {
   try {
+    console.log("here");
    
     const apiKey = process.env.NASAAPI;
     const baseApi = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
   
    
-    const { count, startDate, endDate, date } = req.body;
-
-    let apiUrl;
-
-    // Handle `count` parameter
-    if (count) {
-      apiUrl = `${baseApi}&count=${count}`;
-    }
-    // Handle `startDate` and `endDate` parameters
-    else if (startDate && endDate) {
-      apiUrl = `${baseApi}&start_date=${startDate}&end_date=${endDate}`;
-    }
-    // Handle `date` parameter
-    else if (date) {
-      apiUrl = `${baseApi}&date=${date}`;
-    }
-    // Default: No parameters, just fetch the APOD for today
-    else {
-      apiUrl = baseApi;
-    }
-    
+   
 
     // Fetch data from the NASA API
-    const response = await fetch(apiUrl);
+    const response = await fetch(baseApi);
     if (!response.ok) {
       throw new Error(`NASA API error: ${response.statusText}`);
     }
