@@ -3,7 +3,6 @@ dotenv.config();
 
 module.exports = async (req, res) => {
   try {
-    console.log("here");
    
     const apiKey = process.env.NASAAPI;
     const baseApi = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
