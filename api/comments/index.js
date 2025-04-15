@@ -6,6 +6,6 @@ const router=express.Router();
 
 
 router.get("/getBloComments",getBlogComments);
-router.get("/addComment", authenticate, addComment);
+router.post("/addComment", authenticate, addComment);
 
 module.exports=router;
