@@ -16,7 +16,7 @@ router.get('/getUserBlogs',authenticate,getUserBlogs);
 router.get('/getBlogInfo',getBlogInfo);
 router.get("/getRandomUserBlogs",getRandomUserBlogs);
 router.get("/checkUpvote",authenticate,checkUpvotes);
-router.post("/chnageUpvotes",authenticate,chnageUpvotes);
+router.post("/changeUpvotes",authenticate,chnageUpvotes);
 
 
 module.exports=router;
