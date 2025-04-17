@@ -9,6 +9,7 @@ const getRandomUserBlogs=require("./getRandomUserBlogs");
 const checkUpvotes=require("./checkUpvotes");
 const chnageUpvotes=require("./chnageUpvotes")
 const updateBlog=require("./updateBlog");
+const delteBlog=require("./deletBlog");
 
 router.post('/createBlog',authenticate,createBlog);
 router.get('/getBlogs',getAllBlogs);
@@ -19,6 +20,7 @@ router.get("/getRandomUserBlogs",getRandomUserBlogs);
 router.get("/checkUpvote",authenticate,checkUpvotes);
 router.post("/changeUpvotes",authenticate,chnageUpvotes);
 router.post("/updateBlog",authenticate,updateBlog);
+router.delete("/deleteBlog",authenticate,delteBlog);
 
 
 module.exports=router;
