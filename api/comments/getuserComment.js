@@ -4,7 +4,6 @@ module.exports=async (req,res)=>{
     const userId=req.user.id;
     if(!userId)return res.status(400).json({message:"User Id/token required"});
     const { curosrId } = req.query;
-    console.log(curosrId);
    
     const comments = await getUserComments(userId, curosrId);
     const data={

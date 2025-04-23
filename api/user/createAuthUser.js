@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
-    console.log(email);
+   
     const Creatinguser = await createAuthUser(email);
     const token = createToken(Creatinguser);
     return res.status(200).json({ token: token });
