@@ -20,6 +20,10 @@ model User{
   blogs Blog[]
   comments Comment[]
   upvotes Upvote[]
+  chats Chat[]
+  messages Message[]
+  unreadMessages UnreadMessage[]
+
   
 }
 model Profile{
@@ -41,6 +45,7 @@ model Blog{
   upvotes Int @default(0)
   comments Comment[]
   upvotedBy Upvote[]
+
 }
 model Comment{
   id String @id @default(uuid())
@@ -78,3 +83,32 @@ model Otp{
   
   createdAt DateTime @default(now())
 }
+model Chat {
+  id          String   @id @default(uuid())
+  name        String?  // Optional field for group chat name
+  createdAt   DateTime @default(now())
+
+  participants User[]  // Many-to-many relationship for participants
+  messages     Message[] // One-to-many relationship for messages
+  unreadMessages UnreadMessage[] 
+}
+model Message {
+  id        String   @id @default(uuid())
+  content   String   // Content of the message
+  senderId  String   // Sender's user ID
+  sender    User     @relation(fields: [senderId], references: [id])
+  chatId    String   // Associated chat ID
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model UnreadMessage {
+  id        String   @id @default(uuid())
+  userId    String   // User who has unread messages
+  chatId    String   // Chat in which the user has unread messages
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  chat      Chat     @relation(fields: [chatId], references: [id])
+}
+
