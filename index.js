@@ -15,6 +15,7 @@ const otp = require("./api/otp/index");
 const nasa=require('./api/nasa/index');
 const blogs=require('./api/blogs/index');
 const comments=require('./api/comments/index');
+const messages=require("./api/messages/index");
 
 // routes
 
@@ -36,5 +37,8 @@ app.use("/",blogs);
 
 //comments
 app.use("/",comments);
+
+//messages
+app.use("/",messages);
 
 module.exports = app;
