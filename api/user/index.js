@@ -7,6 +7,7 @@ const deleteUser=require('./deleteUser')
 const getUser=require('./getUser')
 const getAuthUser=require('./getAuthUser')
 const getTestUser=require('./getTestUser')
+const canSendMessage=require("./canSendMessage");
 
 router.post('/createUser',createUser);
 router.post('/createAuthUser',createAuthUser);
@@ -14,5 +15,6 @@ router.delete('/deleteUser',authenticate,deleteUser);
 router.post('/getUser',getUser)
 router.post('/getAuthUser',getAuthUser)
 router.post('/getTestUser',getTestUser)
+router.get("/canSendMessage",authenticate,canSendMessage);
 
 module.exports=router;
