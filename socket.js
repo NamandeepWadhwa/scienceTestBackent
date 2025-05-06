@@ -1,7 +1,5 @@
 const { Server } = require("socket.io");
 const jwt=require("jsonwebtoken");
-const { emit } = require(".");
-const { hashEmail } = require("./lib/hashing/hash");
 
 
 function setUpSocket(server)
@@ -32,6 +30,10 @@ function setUpSocket(server)
   io.on("connection",(socket)=>{
     
     console.log(socket.id);
-  })
+     socket.on("disconnect", () => {
+       console.log("Socket disconnected:", socket.id);
+     });
+  });
+  
 }
 module.exports=setUpSocket;
