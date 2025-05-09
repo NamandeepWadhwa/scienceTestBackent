@@ -28,11 +28,22 @@ function setUpSocket(server)
 
   })
   io.on("connection",(socket)=>{
-    
-    console.log(socket.id);
-     socket.on("disconnect", () => {
-       console.log("Socket disconnected:", socket.id);
-     });
+    // Join chat room
+    socket.on("JOIN_CHAT", (chatId) => {
+      socket.join(chatId);
+      console.log(`User ${socket.user.id} joined chat ${chatId}`);
+    });
+
+    // Leave chat room
+    socket.on("LEAVE_CHAT", (chatId) => {
+      socket.leave(chatId);
+      console.log(`User ${socket.user.id} left chat ${chatId}`);
+    });
+
+    // Handle disconnect
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected:", socket.id);
+    });
   });
   
 }

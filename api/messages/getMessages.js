@@ -10,7 +10,8 @@ module.exports=async(req,res)=>{
     }
     if(messages.length>0)
     {
-      data.cursorId=messages[messages.length-1]._id;
+      
+      data.cursorId=messages[messages.length-1].id;
     }
     return res.status(200).json(data);
   }

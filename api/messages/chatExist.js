@@ -6,7 +6,7 @@ module.exports=async (req,res)=>{
     const userId1=req.user.id;
     if(!userId2)return res.status(400).json({message:"Other user Id is required"});
     const chat=await chatExist(userId1,userId2);
-    return res.status(200).json({isExist:chat});
+    return res.status(200).json(chat);
 
   }
   catch(err)
