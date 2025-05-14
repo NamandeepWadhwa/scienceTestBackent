@@ -104,8 +104,9 @@ model Message {
 
 model UnreadMessage {
   id        String   @id @default(uuid())
-  userId    String   // User who has unread messages
-  chatId    String   // Chat in which the user has unread messages
+  userId    String
+  chatId    String
+  count     Int      @default(1) 
   createdAt DateTime @default(now())
 
   user      User     @relation(fields: [userId], references: [id])

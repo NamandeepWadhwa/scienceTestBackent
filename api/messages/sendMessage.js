@@ -1,6 +1,7 @@
 const sendMessage = require("../../lib/messages/createMessage");
 const getChat = require("../../lib/messages/getChat");
 const socketService = require("../../service");
+const saveUnredMessage = require("../../lib/messages/saveUnredMessage");
 
 module.exports = async (req, res) => {
   try {
@@ -12,6 +13,7 @@ module.exports = async (req, res) => {
     }
 
     const chat = await getChat(chatId);
+    console.log(chat);
     if (!chat) {
       return res.status(400).json({ message: "Chat not found" });
     }
@@ -39,6 +41,7 @@ module.exports = async (req, res) => {
 
     for (const participant of chat.participants) {
       if (participant.id !== userId && !activeUsers.has(participant.id)) {
+        await saveUnredMessage(participant.id, chatId);
         io.to(participant.id).emit("UNREAD_MESSAGE", {
           chatId,
           message: messageData,
