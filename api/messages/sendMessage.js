@@ -37,6 +37,10 @@ module.exports = async (req, res) => {
           socket.emit("NEW_MESSAGE", messageData);
         }
       }
+    };
+    const data={
+      chatId:messageData.chatId,
+      senderId:messageData.senderId,
     }
 
     for (const participant of chat.participants) {
@@ -44,7 +48,8 @@ module.exports = async (req, res) => {
       if (participant.id !== userId && !activeUsers.has(participant.id)) {
         
         await saveUnredMessage(participant.id, chatId);
-        io.to(participant.id).emit("UNREAD_MESSAGE");
+
+        io.to(participant.id).emit("UNREAD_MESSAGE",data);
       }
     }
 
