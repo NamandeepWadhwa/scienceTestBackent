@@ -40,7 +40,9 @@ module.exports = async (req, res) => {
     }
 
     for (const participant of chat.participants) {
+     
       if (participant.id !== userId && !activeUsers.has(participant.id)) {
+        
         await saveUnredMessage(participant.id, chatId);
         io.to(participant.id).emit("UNREAD_MESSAGE");
       }

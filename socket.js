@@ -13,9 +13,11 @@ function setUpSocket(server) {
 
   io.use((socket, next) => {
     const token = socket.handshake.auth.token;
+    
     if (!token) return next(new Error("Unauthorized"));
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      
       socket.user = {
         id: decoded.id,
         email: decoded.email,
@@ -27,6 +29,8 @@ function setUpSocket(server) {
   });
 
   io.on("connection", (socket) => {
+   
+    socket.join(socket.user.id);
     socket.on("JOIN_CHAT", (chatId) => {
       socket.join(chatId);
       socket.join(socket.user.id);
