@@ -1,6 +1,6 @@
-const getUser = require("../../lib/user/getAuthUser");
 const createUser = require("../../lib/user/createUser");
 const createToken = require("../../lib/tokens/createToken");
+const getUser = require("../../lib/user/getUser");
 
 module.exports = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     
 
     if (!email || !password) {
-      console.log("I am here")
+   
       return res
         .status(400)
         .json({ message: "email or password cannot be empty" });
